@@ -1,4 +1,4 @@
-# vue3-ip-address-tracker
+# vue2-ip-address-tracker
 
 ## Project setup
 ```
