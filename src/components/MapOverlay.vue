@@ -1,9 +1,14 @@
 <template>
   <div class="map-container">
     <div class="info">
-      <h1>Vue 2.x IP Address Tracker</h1>
+      <h1>
+        <img class="title-logo" src="../assets/logo.png" alt="Vue logo" />
+        <span>{{' '}}IP Address Tracker</span>
+      </h1>
+      <IpForm />
     </div>
     <l-map
+      class="map-content"
       :zoom="zoom"
       :center="center"
       @update:zoom="zoomUpdated"
@@ -21,11 +26,13 @@
 <script>
 import { LMap, LMarker, LTileLayer } from 'vue2-leaflet';
 import { icon } from 'leaflet';
+import IpForm from './IpForm.vue';
 import LocationIcon from '../assets/icon-location.svg';
 import 'leaflet/dist/leaflet.css';
 
 export default {
   components: {
+    IpForm,
     LMap,
     LMarker,
     LTileLayer,
@@ -34,8 +41,8 @@ export default {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: `&copy; OpenStreetMap ${new Date().getFullYear()}`,
-      zoom: 6,
-      center: [31.623812, 34.541016],
+      zoom: 13,
+      center: [31.997113, 34.782715],
       markerCoordinates: [31.997113, 34.782715],
       markerIcon: icon({
         iconUrl: LocationIcon,
@@ -61,16 +68,25 @@ export default {
 
 <style lang="scss">
 .map-container {
-  height: 85vh;
+  height: calc(75vh - 20px);
 
   .info {
     height: 15vh;
 
     h1 {
       margin-top: 0;
-      padding-top: 20px;
       color: white;
+      font-weight: 500;
+
+      .title-logo {
+        width: 64px;
+        vertical-align: middle;
+      }
     }
+  }
+
+  .map-content {
+    margin-top: 9vh;
   }
 }
 </style>
