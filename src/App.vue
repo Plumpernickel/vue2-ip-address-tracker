@@ -31,6 +31,10 @@ html, body {
     background-image: url('./assets/pattern-bg.png');
     background-size: contain;
     background-repeat: no-repeat;
+
+    @media screen and (max-width: 667px) {
+      background-size: auto;
+    }
   }
 }
 </style>

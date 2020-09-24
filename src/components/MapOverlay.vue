@@ -5,15 +5,12 @@
         <img class="title-logo" src="../assets/logo.png" alt="Vue logo" />
         <span>{{' '}}IP Address Tracker</span>
       </h1>
-      <IpForm />
+      <IpForm v-on:update:latlng="handleUpdateLatLng" />
     </div>
     <l-map
       class="map-content"
       :zoom="zoom"
       :center="center"
-      @update:zoom="zoomUpdated"
-      @update:center="centerUpdated"
-      @update:bounds="boundsUpdated"
     >
       <l-marker
         :lat-lng="markerCoordinates"
@@ -53,14 +50,11 @@ export default {
     };
   },
   methods: {
-    zoomUpdated(zoom) {
-      this.zoom = zoom;
-    },
-    centerUpdated(center) {
-      this.center = center;
-    },
-    boundsUpdated(bounds) {
-      this.bounds = bounds;
+    handleUpdateLatLng($event) {
+      if ($event[0] && $event[1]) {
+        this.center = $event;
+        this.markerCoordinates = $event;
+      }
     },
   },
 };
@@ -68,7 +62,7 @@ export default {
 
 <style lang="scss">
 .map-container {
-  height: calc(75vh - 20px);
+  height: 75vh;
 
   .info {
     height: 15vh;
@@ -86,7 +80,7 @@ export default {
   }
 
   .map-content {
-    margin-top: 9vh;
+    margin-top: calc(225px - 15vh);
   }
 }
 </style>
